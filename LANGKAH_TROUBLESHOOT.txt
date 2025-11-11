@@ -1,0 +1,173 @@
+╔═══════════════════════════════════════════════════════════════╗
+║           🔧 TROUBLESHOOTING - WEBSITE MASIH BLANK            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+SITUASI SAAT INI:
+-----------------
+❌ Website masih blank
+❌ Error: main.614a13f1.js (file lama yang sudah tidak ada)
+✅ File lokal sudah benar: main.7ab369e1.js
+
+KEMUNGKINAN PENYEBAB:
+---------------------
+1. Server belum sync dengan perubahan lokal
+2. Ada file lama di server yang belum terhapus
+3. Server cache belum clear
+4. Browser cache sangat kuat
+
+═══════════════════════════════════════════════════════════════
+
+🔍 LANGKAH 1: CEK FILE DI SERVER
+
+Buka browser, akses:
+👉 https://dev.envirometrolestari.com/check-files.php
+
+Halaman ini akan menunjukkan:
+- File JS apa yang ada di server
+- Apakah index.html sudah update
+- Timestamp file terakhir diupdate
+
+YANG HARUS TERLIHAT:
+✅ main.7ab369e1.js (NEW) - ada
+❌ main.614a13f1.js (OLD) - tidak ada atau 404
+
+═══════════════════════════════════════════════════════════════
+
+🔄 LANGKAH 2: TUNGGU SINKRONISASI
+
+Jika project tersinkronisasi otomatis dengan server:
+
+1. Tunggu 2-5 menit untuk sync selesai
+2. Refresh halaman check-files.php
+3. Pastikan file baru sudah muncul di server
+
+═══════════════════════════════════════════════════════════════
+
+🗑️ LANGKAH 3: HAPUS FILE LAMA DI SERVER (JIKA MASIH ADA)
+
+Jika check-files.php menunjukkan file lama masih ada:
+
+OPSI A - Via cPanel File Manager:
+1. Login ke cPanel
+2. Buka File Manager
+3. Navigate ke: public_html/frontend/static/js/
+4. Hapus file: main.614a13f1.js*
+5. Pastikan main.7ab369e1.js ada
+
+OPSI B - Via FTP:
+1. Connect ke FTP
+2. Navigate ke: /public_html/frontend/static/js/
+3. Delete: main.614a13f1.js*
+4. Verify: main.7ab369e1.js exists
+
+OPSI C - Via SSH (jika ada akses):
+cd public_html/frontend/static/js/
+rm -f main.614a13f1.js*
+ls -lh main.*.js
+
+═══════════════════════════════════════════════════════════════
+
+🧹 LANGKAH 4: CLEAR BROWSER CACHE
+
+Setelah file di server sudah benar:
+
+1. Tutup SEMUA tab browser
+2. Tutup browser sepenuhnya
+3. Buka Task Manager (Ctrl+Shift+Esc)
+4. End task semua proses browser
+5. Buka browser baru
+6. Tekan Ctrl+Shift+Delete
+7. Clear "Cached images and files" - All time
+8. Tutup browser lagi
+9. Buka browser baru
+10. Akses: https://dev.envirometrolestari.com
+
+═══════════════════════════════════════════════════════════════
+
+🔬 LANGKAH 5: TEST DENGAN TOOLS
+
+Test 1 - Direct File Access:
+Buka: https://dev.envirometrolestari.com/frontend/static/js/main.7ab369e1.js
+
+Harus:
+✅ Download file atau tampil kode JS
+✅ Size: ~463 KB
+❌ Bukan error 404
+
+Test 2 - Old File (harus 404):
+Buka: https://dev.envirometrolestari.com/frontend/static/js/main.614a13f1.js
+
+Harus:
+✅ Error 404 Not Found
+❌ Bukan download file
+
+═══════════════════════════════════════════════════════════════
+
+📱 LANGKAH 6: TEST DI DEVICE LAIN
+
+Test di HP/Tablet:
+1. Buka browser di HP
+2. Akses: https://dev.envirometrolestari.com
+3. Jika berhasil = masalah di browser PC
+4. Jika gagal = masalah di server
+
+Test di Browser Lain:
+1. Chrome → Firefox
+2. Firefox → Edge
+3. Edge → Chrome
+
+═══════════════════════════════════════════════════════════════
+
+🆘 JIKA MASIH GAGAL SETELAH SEMUA LANGKAH
+
+Kemungkinan ada CDN atau proxy cache:
+
+1. Tunggu 15-30 menit
+2. Atau contact hosting support untuk clear server cache
+3. Atau restart web server (jika ada akses)
+
+═══════════════════════════════════════════════════════════════
+
+📊 CHECKLIST TROUBLESHOOTING
+
+[ ] Akses check-files.php untuk cek file di server
+[ ] Pastikan main.7ab369e1.js ada di server
+[ ] Pastikan main.614a13f1.js TIDAK ada di server
+[ ] Tunggu 2-5 menit untuk sync
+[ ] Clear browser cache (Ctrl+Shift+Delete)
+[ ] Tutup dan buka browser baru
+[ ] Test direct access ke file JS baru
+[ ] Test di incognito mode
+[ ] Test di browser lain
+[ ] Test di device lain (HP)
+[ ] Tunggu 15-30 menit jika ada CDN
+
+═══════════════════════════════════════════════════════════════
+
+💡 QUICK FIX SEMENTARA
+
+Jika urgent dan perlu akses sekarang:
+
+1. Akses via incognito: Ctrl+Shift+N
+2. Atau gunakan browser yang belum pernah buka website ini
+3. Atau gunakan HP dengan mobile data
+
+═══════════════════════════════════════════════════════════════
+
+📞 INFO TEKNIS
+
+File Lokal (Sudah Benar):
+✅ deployment-ready/frontend/index.html → main.7ab369e1.js?v=20251110
+✅ deployment-ready/frontend/static/js/main.7ab369e1.js (463 KB)
+
+File di Server (Perlu Dicek):
+❓ public_html/frontend/index.html → ???
+❓ public_html/frontend/static/js/main.*.js → ???
+
+Cara Cek: https://dev.envirometrolestari.com/check-files.php
+
+═══════════════════════════════════════════════════════════════
+
+Status: 🔄 WAITING FOR SERVER SYNC
+Action: Akses check-files.php untuk diagnosa
+ 

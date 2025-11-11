@@ -1,0 +1,210 @@
+╔═══════════════════════════════════════════════════════════════╗
+║          📧 CARA TEST EMAIL VERIFICATION - LENGKAP            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+STATUS: ✅ Frontend sudah diupdate dan di-copy ke deployment-ready
+
+═══════════════════════════════════════════════════════════════
+
+⏱️ TUNGGU SYNC (PENTING!)
+
+Karena project tersinkronisasi dengan server:
+1. Tunggu 2-3 menit untuk file sync
+2. Atau clear browser cache
+3. Atau buka incognito mode
+
+═══════════════════════════════════════════════════════════════
+
+🧪 LANGKAH TEST (IKUTI URUTAN!)
+
+STEP 1: Clear Browser Cache
+----------------------------
+Tekan: Ctrl + Shift + Delete
+Pilih: "Cached images and files"
+Klik: "Clear data"
+
+Atau buka Incognito: Ctrl + Shift + N
+
+STEP 2: Register User Baru
+---------------------------
+URL: https://dev.envirometrolestari.com/register
+
+Isi form:
+- Username: testuser123
+- Email: your-email@example.com (gunakan email Anda!)
+- Password: Test@123456
+- Konfirmasi Password: Test@123456
+- Nama Perusahaan: PT Test Indonesia
+- Alamat Perusahaan: Jl. Test No. 123, Jakarta Selatan
+- Nomor Telepon: 08123456789
+- ✓ Centang "Syarat dan Ketentuan"
+
+Klik: "Daftar Sekarang"
+
+Expected Response:
+"Registration successful. Please check your email for verification link."
+
+STEP 3: Cek Email Inbox
+------------------------
+1. Buka email inbox Anda
+2. Cari email dari: noreply@envirometrolestari.com
+3. Subject: "Verify Your Email Address"
+4. Jika tidak ada di Inbox, cek folder Spam/Junk
+
+Email Content:
+- Welcome message
+- "Verify Email Address" button (hijau)
+- Manual link (jika button tidak work)
+
+STEP 4: Klik Verification Link
+-------------------------------
+Klik button "Verify Email Address"
+
+Browser akan buka:
+https://dev.envirometrolestari.com/verify-email/{token}
+
+Halaman akan show:
+1. Loading spinner (2-3 detik)
+2. Success message: "Verification Successful!"
+3. Auto-redirect ke login (3 detik)
+
+STEP 5: Login
+-------------
+URL: https://dev.envirometrolestari.com/login
+
+Isi form:
+- Email: your-email@example.com (yang tadi didaftarkan)
+- Password: Test@123456
+
+Klik: "Masuk"
+
+Expected: Berhasil login dan masuk ke Dashboard!
+
+═══════════════════════════════════════════════════════════════
+
+✅ TANDA BERHASIL
+
+Register:
+✓ Muncul success message
+✓ Email terkirim
+
+Email:
+✓ Email masuk ke inbox (atau spam)
+✓ From: noreply@envirometrolestari.com
+✓ Subject: "Verify Your Email Address"
+✓ Button dan link ada
+
+Verification:
+✓ Halaman /verify-email/{token} muncul
+✓ Loading spinner tampil
+✓ Success message muncul
+✓ Auto-redirect ke login
+
+Login:
+✓ Bisa login dengan email & password
+✓ Masuk ke dashboard
+✓ Tidak ada error
+
+═══════════════════════════════════════════════════════════════
+
+❌ JIKA MASIH ERROR
+
+Error: "No routes matched location"
+-----------------------------------
+Penyebab: Frontend belum sync ke server
+
+Solusi:
+1. Tunggu 3-5 menit untuk sync
+2. Clear browser cache (Ctrl+Shift+Delete)
+3. Hard refresh (Ctrl+Shift+R)
+4. Buka incognito mode
+5. Test lagi
+
+Error: "Invalid verification token"
+-----------------------------------
+Penyebab: Token sudah digunakan atau salah
+
+Solusi:
+1. Register user baru dengan email berbeda
+2. Gunakan verification link yang baru
+3. Jangan klik link lebih dari 1x
+
+Error: Email tidak masuk
+------------------------
+Penyebab: Email masuk ke spam atau delay
+
+Solusi:
+1. Cek folder Spam/Junk
+2. Tunggu 1-2 menit
+3. Cek email address benar
+4. Test send email: /api/test/send-email?to=your-email
+
+Error: Cannot login after verify
+---------------------------------
+Penyebab: Email belum ter-verify atau password salah
+
+Solusi:
+1. Pastikan klik verification link
+2. Pastikan muncul "Verification Successful"
+3. Cek password benar (case-sensitive)
+4. Try forgot password jika lupa
+
+═══════════════════════════════════════════════════════════════
+
+🔍 DEBUG TOOLS
+
+Test Email Configuration:
+https://dev.envirometrolestari.com/api/test/email
+
+Send Test Email:
+https://dev.envirometrolestari.com/api/test/send-email?to=your-email@example.com
+
+Clear Cache:
+https://dev.envirometrolestari.com/clear-cache.php
+
+System Info:
+https://dev.envirometrolestari.com/api/test/info
+
+═══════════════════════════════════════════════════════════════
+
+📊 EXPECTED TIMELINE
+
+00:00 - Register user
+00:01 - Email sent
+00:02 - Email received (check inbox)
+00:03 - Click verification link
+00:04 - Verification page loads
+00:05 - Success message shows
+00:08 - Auto-redirect to login
+00:09 - Login successful
+00:10 - Dashboard loaded
+
+Total: ~10 seconds (excluding email delivery time)
+
+═══════════════════════════════════════════════════════════════
+
+💡 TIPS
+
+1. Gunakan email yang bisa Anda akses
+2. Jangan gunakan email yang sudah terdaftar
+3. Simpan password yang Anda gunakan
+4. Jika test berkali-kali, gunakan email berbeda
+5. Clear cache sebelum test untuk hasil terbaik
+
+═══════════════════════════════════════════════════════════════
+
+📞 JIKA MASIH GAGAL SETELAH 5 MENIT
+
+1. Screenshot error yang muncul
+2. Copy error message dari console (F12)
+3. Cek logs: backend/writable/logs/log-{date}.php
+4. Share error detail untuk debugging
+
+═══════════════════════════════════════════════════════════════
+
+Status: ✅ READY TO TEST
+Files: ✅ Synced to deployment-ready
+Next: Wait 2-3 minutes → Clear cache → Test!
+
+Tanggal: 10 November 2025
+ 

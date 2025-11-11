@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Clear Cache & Redirect</title>
+    <script>
+        // Force clear cache and redirect
+        if ('caches' in window) {
+            caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+            });
+        }
+        
+        // Add timestamp to force reload
+        const timestamp = new Date().getTime();
+        setTimeout(function() {
+            window.location.href = '/frontend/index.html?v=' + timestamp;
+        }, 1000);
+    </script>
+</head>
+<body>
+    <h1>Clearing cache...</h1>
+    <p>Please wait, redirecting to application...</p>
+    <p>If not redirected, <a href="/frontend/index.html">click here</a></p>
+</body>
+</html>
+ 

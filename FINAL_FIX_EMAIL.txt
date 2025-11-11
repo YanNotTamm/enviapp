@@ -1,0 +1,170 @@
+╔═══════════════════════════════════════════════════════════════╗
+║              🔧 FINAL FIX - EMAIL CONFIGURATION               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+MASALAH:
+--------
+System masih connect ke smtp.gmail.com meskipun sudah update config.
+
+PENYEBAB:
+---------
+1. PHP OpCache menyimpan file lama
+2. Environment variables tidak ter-load
+3. File di server belum ter-update
+
+SOLUSI FINAL:
+-------------
+✅ HARDCODE configuration langsung di Email.php
+✅ Tidak pakai environment variables lagi
+✅ Clear cache untuk force reload
+
+═══════════════════════════════════════════════════════════════
+
+📝 KONFIGURASI BARU (HARDCODED)
+
+File: backend/app/Config/Email.php
+
+```php
+$this->fromEmail = 'noreply@envirometrolestari.com';
+$this->fromName = 'EnviliApps - Envirometro Lestari Indonesia';
+$this->SMTPHost = 'mail.envirometrolestari.com';
+$this->SMTPUser = 'noreply@envirometrolestari.com';
+$this->SMTPPass = 'Notreppenvi25';
+$this->SMTPPort = 465;
+$this->SMTPCrypto = ''; // Empty for port 465
+```
+
+═══════════════════════════════════════════════════════════════
+
+🚀 LANGKAH-LANGKAH (IKUTI URUTAN!)
+
+STEP 1: Clear Cache
+--------------------
+Akses: https://dev.envirometrolestari.com/clear-cache.php
+
+Ini akan:
+✅ Clear PHP OpCache
+✅ Clear APCu cache
+✅ Clear CodeIgniter cache files
+
+STEP 2: Verify Configuration
+-----------------------------
+Akses: https://dev.envirometrolestari.com/api/test/email
+
+Expected Response:
+{
+  "success": true,
+  "config": {
+    "host": "mail.envirometrolestari.com",  ← HARUS INI!
+    "port": 465,
+    "user": "noreply@envirometrolestari.com"
+  }
+}
+
+JIKA MASIH smtp.gmail.com:
+- Tunggu 2-3 menit untuk sync
+- Clear cache lagi
+- Atau restart PHP-FPM (jika ada akses)
+
+STEP 3: Send Test Email
+------------------------
+Akses: https://dev.envirometrolestari.com/api/test/send-email?to=your-email@example.com
+
+Expected: Email terkirim tanpa error!
+
+STEP 4: Test Register
+----------------------
+1. Register user baru
+2. Cek email inbox
+3. Klik verification link
+4. Login
+
+═══════════════════════════════════════════════════════════════
+
+✅ CHECKLIST
+
+[ ] Akses clear-cache.php
+[ ] Tunggu 2-3 menit untuk sync
+[ ] Test /api/test/email
+[ ] Verify host = mail.envirometrolestari.com
+[ ] Send test email
+[ ] Email masuk ke inbox
+[ ] Register user baru
+[ ] Verify email received
+[ ] Click verification link
+[ ] Login successful
+
+═══════════════════════════════════════════════════════════════
+
+🔍 TROUBLESHOOTING
+
+Masih connect ke Gmail?
+-----------------------
+1. Clear cache lagi: /clear-cache.php
+2. Tunggu 5 menit untuk sync
+3. Check file di server:
+   - deployment-ready/backend/app/Config/Email.php
+   - Pastikan ada "mail.envirometrolestari.com"
+
+Restart PHP-FPM (jika ada akses):
+----------------------------------
+sudo systemctl restart php-fpm
+# atau
+sudo service php7.4-fpm restart
+# atau
+sudo service php8.1-fpm restart
+
+Check PHP version:
+------------------
+php -v
+
+Clear OpCache via CLI:
+----------------------
+php -r "opcache_reset();"
+
+═══════════════════════════════════════════════════════════════
+
+📊 EXPECTED BEHAVIOR
+
+BEFORE:
+-------
+❌ Connect to: smtp.gmail.com:587
+❌ Error: Username and Password not accepted
+❌ Using TLS encryption
+
+AFTER:
+------
+✅ Connect to: mail.envirometrolestari.com:465
+✅ Authentication successful
+✅ Using SSL (implicit)
+✅ Email sent successfully
+
+═══════════════════════════════════════════════════════════════
+
+💡 TIPS
+
+1. Bookmark clear-cache.php untuk quick cache clear
+2. Setelah update config, selalu clear cache
+3. Test dengan /api/test/email sebelum send email
+4. Jika masih error, tunggu 5 menit untuk sync
+
+═══════════════════════════════════════════════════════════════
+
+📞 JIKA MASIH GAGAL
+
+Contact hosting support dengan info:
+- File: backend/app/Config/Email.php
+- Issue: PHP OpCache not clearing
+- Request: Restart PHP-FPM or clear OpCache
+
+Atau:
+- Disable OpCache temporarily
+- Check file permissions
+- Verify file sync working
+
+═══════════════════════════════════════════════════════════════
+
+Status: ✅ HARDCODED CONFIGURATION READY
+Next: Clear cache → Test → Verify
+Date: 10 November 2025
+ 
